@@ -7,6 +7,7 @@ public class Test : MonoBehaviour
     public float speed;
     public float rotationSpeed;
     public float jumpSpeed;
+    public float zRange;
 
     private CharacterController characterController;
     private float ySpeed;
@@ -53,6 +54,12 @@ public class Test : MonoBehaviour
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
+        if (transform.position.z < -zRange)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
+        }
     }
+    
+   
 }
 
