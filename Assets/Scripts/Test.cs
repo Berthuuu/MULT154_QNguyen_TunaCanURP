@@ -8,15 +8,20 @@ public class Test : MonoBehaviour
     public float rotationSpeed;
     public float jumpSpeed;
     public float zRange;
+    private Animator anim;
+    Rigidbody rgBody = null;
 
     private CharacterController characterController;
     private float ySpeed;
     private float originalStepOffset;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         characterController = GetComponent<CharacterController>();
         originalStepOffset = characterController.stepOffset;
+        rgBody = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -24,6 +29,8 @@ public class Test : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float veritcalInput = Input.GetAxis("Vertical");
+
+        anim.SetInteger("Walk", 0);
 
         Vector3 movementDirection = new Vector3(horizontalInput, 0, veritcalInput);
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * speed;
@@ -36,7 +43,9 @@ public class Test : MonoBehaviour
             ySpeed = -0.5f;
             if (Input.GetButtonDown("Jump"))
             {
+                anim.SetBool("jump", true);
                 ySpeed = jumpSpeed;
+                
             }
         }
         else

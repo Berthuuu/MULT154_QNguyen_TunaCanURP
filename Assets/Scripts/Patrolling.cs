@@ -7,7 +7,7 @@ public class Patrolling : MonoBehaviour
 {
     public List<GameObject> waypoints;
     private NavMeshAgent agent;
-    private const float WP_THRESHOLD = 8.0f;
+    private const float WP_THRESHOLD = 10.0f;
     private GameObject currentWP;
     private int currentWPIndex = -1;
 
