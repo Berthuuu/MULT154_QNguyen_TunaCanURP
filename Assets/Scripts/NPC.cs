@@ -9,6 +9,7 @@ public class NPC : MonoBehaviour
     public GameObject target;
     public GameObject[] huntingSpots;
     private Rigidbody rbBody;
+    private Animator anim;
     public BMode mode;
 
     public enum BMode
@@ -27,11 +28,14 @@ public class NPC : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         rbBody = target.GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+        Vector3 v3Velocity = rbBody.velocity;
     }
 
     void Seek(Vector3 location)
     {
         agent.SetDestination(location);
+            anim.SetFloat("Walk", 0.2f); 
     }
 
     void Flee (Vector3 location)

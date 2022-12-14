@@ -8,6 +8,7 @@ public class Test : MonoBehaviour
     public float rotationSpeed;
     public float jumpSpeed;
     public float zRange;
+    public float xRange;
     private Animator anim;
     Rigidbody rgBody = null;
 
@@ -30,10 +31,11 @@ public class Test : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float veritcalInput = Input.GetAxis("Vertical");
 
-        anim.SetInteger("Walk", 0);
+        
 
         Vector3 movementDirection = new Vector3(horizontalInput, 0, veritcalInput);
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * speed;
+        anim.SetInteger("Walk", Mathf.CeilToInt(magnitude));
         movementDirection.Normalize();
 
         ySpeed += Physics.gravity.y * Time.deltaTime;
@@ -43,7 +45,7 @@ public class Test : MonoBehaviour
             ySpeed = -0.5f;
             if (Input.GetButtonDown("Jump"))
             {
-                anim.SetBool("jump", true);
+                anim.SetTrigger("jump");
                 ySpeed = jumpSpeed;
                 
             }
@@ -66,6 +68,11 @@ public class Test : MonoBehaviour
         if (transform.position.z < -zRange)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
+        }
+
+        if (transform.position.x < -xRange)
+        {
+            transform.position = new Vector3(-xRange,transform.position.y, transform.position.z);
         }
     }
     

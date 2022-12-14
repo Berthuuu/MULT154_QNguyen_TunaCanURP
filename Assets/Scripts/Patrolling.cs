@@ -10,12 +10,14 @@ public class Patrolling : MonoBehaviour
     private const float WP_THRESHOLD = 10.0f;
     private GameObject currentWP;
     private int currentWPIndex = -1;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         currentWP = GetNextWaypoint();
+        anim = GetComponent<Animator>();
     }
     GameObject GetNextWaypoint()      
     {
@@ -23,6 +25,7 @@ public class Patrolling : MonoBehaviour
         if (currentWPIndex == waypoints.Count)
         {
             currentWPIndex = 0;
+            anim.SetInteger("Walk", 0);
         }
         return waypoints[currentWPIndex];
     }
