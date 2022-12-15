@@ -16,10 +16,5 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void Win()
-    {
-        youWinText.SetActive(true);
-
-    }
 
 }
